@@ -1,6 +1,5 @@
 import React from 'react'
 import Logo from '../assets/walmart-logo-transparent-free-png.webp'
-import smallImage from '../assets/shopping-cart.png';
 import CartModal from './CartModal';
 
 const Navbar = () => {

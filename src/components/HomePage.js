@@ -24,7 +24,7 @@ const HomePage = () => {
     }, []);
 
     return (
-        <>
+        <div style={{ overflowX: 'hidden' }}>
             {isSticky && <div><Navbar /></div>}
 
             <div
@@ -113,8 +113,8 @@ const HomePage = () => {
                     </div>
                 )}
             </div>
-            <Products Title="Items Related to your Search"/>
-            <Products Title="You may also Like"/>
+            <Products Btitle="Add to Cart" Bcolor="blue" Title="Items Related to your Search"/>
+            <Products Btitle="Add to Cart" Bcolor="blue" Title="You may also Like"/>
 
             <style jsx>
                 {`
@@ -123,7 +123,7 @@ const HomePage = () => {
                     }
                 `}
             </style>
-        </>
+        </div>
     );
 };
 

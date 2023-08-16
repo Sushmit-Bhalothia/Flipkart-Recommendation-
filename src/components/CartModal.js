@@ -61,7 +61,7 @@ const CartModal = () => {
                             maxWidth: '80%',
                         }}
                     >
-                        <Products Title="Cart"/>
+                        <Products Btitle="Remove Item" Bcolor="red" Title="Cart"/>
                         
                         <button
                             onClick={handleCloseModal}
