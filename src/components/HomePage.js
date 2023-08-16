@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import backgroundImage from '../assets/TopImg.png';
-import smallImage from '../assets/shopping-cart.png';
+
 import Navbar from './Navbar';
 import MainImg from '../assets/Walmart_logo.svg.png';
+import Products from './Products';
+import CartModal from './CartModal';
 
 const HomePage = () => {
     const [isSticky, setIsSticky] = useState(false);
@@ -24,8 +26,8 @@ const HomePage = () => {
 
     return (
         <>
-            {isSticky && <div><Navbar/></div>}
-            
+            {isSticky && <div><Navbar /></div>}
+
             <div
                 style={{
                     height: '50vh',
@@ -46,7 +48,7 @@ const HomePage = () => {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundAttachment: 'fixed',
-                        opacity:0.5,
+                        opacity: 0.5,
                     }}
                 ></div>
                 <div
@@ -56,9 +58,9 @@ const HomePage = () => {
                         top: '50%', // Adjust top position as needed
                         left: '50%', // Adjust left position as needed
                         transform: 'translate(-48%, -70%)', // Center the image
-                        backgroundColor:'white',
-                        padding:'15px',
-                        borderRadius:'10px'
+                        backgroundColor: 'white',
+                        padding: '15px',
+                        borderRadius: '10px'
                     }}
                 >
                     <img src={MainImg} alt='noimg' style={{ opacity: 1, maxWidth: '100%' }} />
@@ -73,6 +75,7 @@ const HomePage = () => {
                     }}
                 >
                     {!isSticky && (
+                        <>
                         <input
                             type="text"
                             className="search-bar bg-white border border-gray-300 rounded p-2 w-full"
@@ -89,6 +92,8 @@ const HomePage = () => {
                                 cursor: 'pointer', // Change cursor on hover
                             }}
                         />
+                        
+                        </>   
                     )}
                 </div>
                 {!isSticky && (
@@ -104,17 +109,12 @@ const HomePage = () => {
                             borderWidth: '1px',
                         }}
                     >
-                        <img src={smallImage} alt='noimg' style={{ width: '30px', height: '30px' }} />
+                        <CartModal/>
                     </div>
                 )}
             </div>
-            <div>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            </div>
+            <Products Title="Items Related to your Search"/>
+            <Products Title="You may also Like"/>
 
             <style jsx>
                 {`
