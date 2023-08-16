@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import backgroundImage from '../assets/TopImg.png';
-
 import Navbar from './Navbar';
 import MainImg from '../assets/Walmart_logo.svg.png';
 import Products from './Products';
@@ -104,7 +103,8 @@ const HomePage = () => {
                             right: '10px', // Adjust right position as needed
                             backgroundColor: 'white',
                             borderRadius: '50px',
-                            padding: '15px',
+                            padding: '10px',
+                            paddingRight:'15px',
                             borderColor: 'black',
                             borderWidth: '1px',
                         }}

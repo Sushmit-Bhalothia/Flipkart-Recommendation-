@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Products from './Products';
+import smallImage from '../assets/shopping-cart.png'
 
 const CartModal = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +34,7 @@ const CartModal = () => {
                     cursor: 'pointer',
                 }}
             >
-                Open Cart
+                <img src={smallImage} alt='noimg' style={{ width: '30px', height: '30px' }} />
             </button>
 
             {isModalOpen && (
