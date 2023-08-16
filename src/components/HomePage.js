@@ -5,8 +5,10 @@ import MainImg from '../assets/Walmart_logo.svg.png';
 import Products from './Products';
 import CartModal from './CartModal';
 
-const HomePage = () => {
+const HomePage = (props) => {
     const [isSticky, setIsSticky] = useState(false);
+    const [searchTerm, setSearchTerm] = useState(''); // State to hold the search term
+    const [searchResult, setSearchResult] = useState('')
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,6 +24,23 @@ const HomePage = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    // Function to handle the search button click
+    const handleSearchClick = (event) => {
+        event.preventDefault();
+        if (searchTerm) {
+            // Make your API call using the searchTerm
+            // Example API call using fetch:
+            fetch(`https://b474-2409-4051-2e97-8304-c85c-e246-e6c2-6a59.ngrok-free.app/api/search/?q=${searchTerm}`)
+                .then(response => response.json())
+                .then(data => {
+                    setSearchResult(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+    };
 
     return (
         <div style={{ overflowX: 'hidden' }}>
@@ -75,24 +94,33 @@ const HomePage = () => {
                 >
                     {!isSticky && (
                         <>
-                        <input
-                            type="text"
-                            className="search-bar bg-white border border-gray-300 rounded p-2 w-full"
-                            placeholder="Search Items..."
-                            style={{
-                                width: '50vw',
-                                padding: '10px',
-                                paddingLeft: '30px',
-                                fontSize: '20px',
-                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
-                                border: '1px solid #ccc',
-                                borderRadius: '30px', // Rounded corners
-                                transition: 'border-color 0.3s', // Add a transition effect
-                                cursor: 'pointer', // Change cursor on hover
-                            }}
-                        />
-                        
-                        </>   
+
+                            <input
+                                type="text"
+                                className="search-bar bg-white border border-gray-300 rounded p-2 w-full"
+                                placeholder="Search Items..."
+                                style={{
+                                    width: '50vw',
+                                    padding: '10px',
+                                    paddingLeft: '30px',
+                                    fontSize: '20px',
+                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
+                                    border: '1px solid #ccc',
+                                    borderRadius: '30px', // Rounded corners
+                                    transition: 'border-color 0.3s', // Add a transition effect
+                                    cursor: 'pointer', // Change cursor on hover
+                                }}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <button
+                                className="search-button bg-blue-500 text-white rounded p-2 ml-2"
+                                onClick={handleSearchClick}
+                            >
+                                Search
+                            </button>
+                        </>
+
                     )}
                 </div>
                 {!isSticky && (
@@ -104,17 +132,17 @@ const HomePage = () => {
                             backgroundColor: 'white',
                             borderRadius: '50px',
                             padding: '10px',
-                            paddingRight:'15px',
+                            paddingRight: '15px',
                             borderColor: 'black',
                             borderWidth: '1px',
                         }}
                     >
-                        <CartModal/>
+                        <CartModal />
                     </div>
                 )}
             </div>
-            <Products Btitle="Add to Cart" Bcolor="blue" Title="Items Related to your Search"/>
-            <Products Btitle="Add to Cart" Bcolor="blue" Title="You may also Like"/>
+            <Products SearchedItems={searchResult} Btitle="Add to Cart" Bcolor="blue" Title="Items Related to your Search" />
+            <Products RecommendedItems={props.RecommendedItems} Btitle="Add to Cart" Bcolor="blue" Title="Frequently Purchased Together" />
 
             <style jsx>
                 {`
