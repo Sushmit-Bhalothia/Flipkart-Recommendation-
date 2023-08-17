@@ -1,24 +1,64 @@
 import { useState } from "react";
-let products=[]
+let products = []
 
 export default function Products(props) {
   const [cartItems, setCartItems] = useState([]);
 
-  const handleAddToCart = (product) => {
-    const updatedCartItems = [...cartItems, product];
-    setCartItems(updatedCartItems);
-    localStorage.setItem('CartItems', JSON.stringify(updatedCartItems));
+  const handleAddToCart = async (event, product) => {
+    event.preventDefault(); // Prevent page reload
+
+    const userId = localStorage.getItem("id"); // Get user ID from localStorage
+    const productUid = product.product_uid; // Get product_uid
+
+    const apiEndpoint = "https://9d0d-2409-4051-2e97-8304-c85c-e246-e6c2-6a59.ngrok-free.app/api/add-cart-data/";
+
+    try {
+      // Make the API call to add the item to the cart
+      const response = await fetch(apiEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          q: productUid,
+        }),
+      });
+
+      if (response.ok) {
+        // Handle the successful response if needed
+
+        // Update the cart items in state and local storage
+        const updatedCartItems = [...cartItems, product];
+        setCartItems(updatedCartItems);
+        localStorage.setItem("CartItems", JSON.stringify(updatedCartItems));
+      } else {
+        // Handle errors or failed response
+        console.error("Error adding item to cart:", response.statusText);
+      }
+    } catch (error) {
+      // Handle error if the API call fails
+      console.error("Error adding item to cart:", error);
+    }
+  };
+
+  const handleRemoveFromCart = (event,productUid) => {
+    event.preventDefault();
+    console.log(productUid);
+    // const updatedCartItems = cartItems.filter(item => item.product_uid !== productUid);
+    // setCartItems(updatedCartItems);
+    // localStorage.setItem("CartItems", JSON.stringify(updatedCartItems));
   };
 
   if (props.Title === "Items Related to your Search") products = props.SearchedItems;
-  else if (props.Title === "Frequently Purchased Together")products = props.RecommendedItems;
-  else{
+  else if (props.Title === "Frequently Purchased Together") products = props.RecommendedItems;
+  else {
     const storedCartItems = localStorage.getItem('CartItems');
     products = storedCartItems ? JSON.parse(storedCartItems) : [];
   }
   return (
     <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-      {products.length!==0 && <div className="bg-white">
+      {products?.length !== 0 && <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>{props.Title}</h2>
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
@@ -32,11 +72,21 @@ export default function Products(props) {
                   />
                 </div>
                 <h3 className="mt-4 text-sm text-gray-700">{product.product_title}</h3>
-                <button
-                  onClick={() => handleAddToCart(product)} // Call the handleAddToCart function
-                  className={`bottom-4 left-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition`}
-                >{props.Btitle}
-                </button>
+                {props.Title === "Cart" ? (
+                  <button
+                    onClick={(event) => handleRemoveFromCart(event,product.product_uid)} // Call the handleRemoveFromCart function
+                    className={`bottom-4 left-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition`}
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    onClick={(event) => handleAddToCart(event, product)} // Pass event and product to the handler
+                    className={`bottom-4 left-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition`}
+                  >
+                    {props.Btitle}
+                  </button>
+                )}
 
               </a>
             ))}
@@ -46,10 +96,10 @@ export default function Products(props) {
       </div>
       }
       {
-        !products.length && props.Title === "Items Related to your Search" && <h2 className="mt-8" style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>Your Searched Items will display Here</h2>
+        !products?.length && props.Title === "Items Related to your Search" && <h2 className="mt-8" style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>Your Searched Items will display Here</h2>
       }
       {
-        !products.length && props.Title === "Cart" && <h2 className="mt-8" style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>Cart is Empty</h2>
+        !products?.length && props.Title === "Cart" && <h2 className="mt-8" style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>Cart is Empty</h2>
       }
     </div>
 

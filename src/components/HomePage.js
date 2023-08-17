@@ -31,7 +31,7 @@ const HomePage = (props) => {
         if (searchTerm) {
             // Make your API call using the searchTerm
             // Example API call using fetch:
-            fetch(`https://b474-2409-4051-2e97-8304-c85c-e246-e6c2-6a59.ngrok-free.app/api/search/?q=${searchTerm}`)
+            fetch(`https://9d0d-2409-4051-2e97-8304-c85c-e246-e6c2-6a59.ngrok-free.app/api/search/?q=${searchTerm}`)
                 .then(response => response.json())
                 .then(data => {
                     setSearchResult(data);
@@ -142,7 +142,7 @@ const HomePage = (props) => {
                 )}
             </div>
             <Products SearchedItems={searchResult} Btitle="Add to Cart" Bcolor="blue" Title="Items Related to your Search" />
-            <Products RecommendedItems={props.RecommendedItems} Btitle="Add to Cart" Bcolor="blue" Title="Frequently Purchased Together" />
+            {props.RecommendedItems && <Products RecommendedItems={props.RecommendedItems} Btitle="Add to Cart" Bcolor="blue" Title="Frequently Purchased Together" />}
 
             <style jsx>
                 {`
