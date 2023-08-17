@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 let products = []
 
 export default function Products(props) {
@@ -10,7 +12,7 @@ export default function Products(props) {
     const userId = localStorage.getItem("id"); // Get user ID from localStorage
     const productUid = product.product_uid; // Get product_uid
 
-    const apiEndpoint = "https://9d0d-2409-4051-2e97-8304-c85c-e246-e6c2-6a59.ngrok-free.app/api/add-cart-data/";
+    const apiEndpoint = "https://9e2c-122-15-204-67.ngrok-free.app/api/add-cart-data/";
 
     try {
       // Make the API call to add the item to the cart
@@ -26,6 +28,7 @@ export default function Products(props) {
       });
 
       if (response.ok) {
+        toast.success("Item added to cart successfully!");
         // Handle the successful response if needed
 
         // Update the cart items in state and local storage
@@ -50,20 +53,23 @@ export default function Products(props) {
     // localStorage.setItem("CartItems", JSON.stringify(updatedCartItems));
   };
 
+  
   if (props.Title === "Items Related to your Search") products = props.SearchedItems;
-  else if (props.Title === "Frequently Purchased Together") products = props.RecommendedItems;
+  else if (props.Title === "You May Also Like") products = props.RecommendedItems;
   else {
     const storedCartItems = localStorage.getItem('CartItems');
     products = storedCartItems ? JSON.parse(storedCartItems) : [];
   }
+  // products.sort((a, b) => b.users_interested - a.users_interested);
   return (
     <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
       {products?.length !== 0 && <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6  lg:max-w-7xl lg:px-8">
           <h2 style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '10px' }}>{props.Title}</h2>
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             {products && products.map((product) => (
-              <a key={product.product_uid} href="/" className="group">
+              <a key={product.product_uid} href="#" className="group">
+                <div className="flex flex-col gap-2 items-center shadow-md p-3 ">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                   <img
                     src={product.product_img_url}
@@ -71,7 +77,7 @@ export default function Products(props) {
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
                   />
                 </div>
-                <h3 className="mt-4 text-sm text-gray-700">{product.product_title}</h3>
+               <h3 className="mt-4 text-sm text-gray-700 text-center">{product.product_title}</h3>
                 {props.Title === "Cart" ? (
                   <button
                     onClick={(event) => handleRemoveFromCart(event,product.product_uid)} // Call the handleRemoveFromCart function
@@ -87,6 +93,7 @@ export default function Products(props) {
                     {props.Btitle}
                   </button>
                 )}
+                </div>
 
               </a>
             ))}
