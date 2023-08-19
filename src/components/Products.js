@@ -89,7 +89,10 @@ export default function Products(props) {
                 products.map((product) => (
                   <a key={product.product_uid} href="#" className="group">
                     <div className="flex flex-col gap-2 items-center shadow-md p-3 ">
-                      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                      <div
+                        style={{ height: "200px" }}
+                        className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
+                      >
                         <img
                           src={product.product_img_url}
                           alt="img"
