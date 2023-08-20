@@ -57,8 +57,7 @@ export default function Products(props) {
     // localStorage.setItem("CartItems", JSON.stringify(updatedCartItems));
   };
 
-  if (props.Title === "Search Results")
-    products = props.SearchedItems;
+  if (props.Title === "Search Results") products = props.SearchedItems;
   else if (props.Title === "Your Recommendations")
     products = props.RecommendedItems;
   else {
@@ -102,7 +101,8 @@ export default function Products(props) {
                         src={product.product_img_url}
                         alt="product image"
                         onError={(e) => {
-                          e.target.src = defaultImage; // Replace with default image on error
+                          e.target.src =
+                            "https://m.media-amazon.com/images/I/71r3RWbLWAL._AC_UL320_.jpg"; // Replace with default image on error
                         }}
                       />
                     </a>
