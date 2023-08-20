@@ -12,6 +12,8 @@ export default function Products(props) {
 
     const userId = localStorage.getItem("id"); // Get user ID from localStorage
     const productUid = product.product_uid; // Get product_uid
+    console.log(userId);
+    console.log(productUid);
 
     const apiEndpoint = `${URL}api/add-cart-data/`;
 
@@ -27,7 +29,7 @@ export default function Products(props) {
           q: productUid,
         }),
       });
-
+      console.log(response);
       if (response.ok) {
         toast.success("Item added to cart successfully!");
         // Handle the successful response if needed
@@ -87,40 +89,74 @@ export default function Products(props) {
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {products &&
                 products.map((product) => (
-                  <a key={product.product_uid} href="#" className="group">
-                    <div className="flex flex-col gap-2 items-center shadow-md p-3 ">
-                      <div
-                        style={{ height: "200px" }}
-                        className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
-                      >
-                        <img
-                          src={product.product_img_url}
-                          alt="img"
-                          className="h-full w-full object-cover object-center group-hover:opacity-75"
-                        />
+                  <div
+                    style={{ height: "450px" }}
+                    key={product.product_uid}
+                    className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <a href="#" key={product.product_uid}>
+                      <img
+                        style={{ height: "250px" }}
+                        className="p-8 rounded-t-lg"
+                        src={product.product_img_url}
+                        alt="product image"
+                      />
+                    </a>
+                    <div className="px-5 pb-5">
+                      <a href="#">
+                        {product.product_title.length > 18
+                          ? `${product.product_title.slice(0, 18)}...`
+                          : product.product_title}
+                      </a>
+
+                      <div className="flex items-center mt-2.5 mb-5">
+                        {[1, 2, 3, 4, 5].map((index) => (
+                          <svg
+                            key={index}
+                            className={`w-4 h-4 ${
+                              index <= Math.random() * 1 + 4
+                                ? "text-yellow-300"
+                                : "text-gray-200 dark:text-gray-600"
+                            } mr-1`}
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 22 20"
+                          >
+                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                          </svg>
+                        ))}
+                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                          {`${(Math.random() * 1 + 4).toFixed(1)}`}
+                        </span>
                       </div>
-                      <h3 className="mt-4 text-sm text-gray-700 text-center">
-                        {product.product_title}
-                      </h3>
-                      {props.Title === "Cart" ? (
-                        <button
-                          onClick={(event) =>
-                            handleRemoveFromCart(event, product.product_uid)
-                          } // Call the handleRemoveFromCart function
-                          className={`bottom-4 left-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition`}
-                        >
-                          Remove
-                        </button>
-                      ) : (
-                        <button
-                          onClick={(event) => handleAddToCart(event, product)} // Pass event and product to the handler
-                          className={`bottom-4 left-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition`}
-                        >
-                          {props.Btitle}
-                        </button>
-                      )}
+
+                      <div className="flex align-left justify-between">
+                        <span className="text-3xl font-bold text-gray-900 mr-1 ">
+                          ₹{product.product_price}
+                        </span>
+                        {props.Title === "Cart" ? (
+                          <button
+                            href="#"
+                            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 "
+                            // onClick={(event) =>
+                            //   handleRemoveFromCart(event, product.product_uid)
+                            // }
+                          >
+                            Remove
+                          </button>
+                        ) : (
+                          <button
+                            href="#"
+                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
+                            onClick={(event) => handleAddToCart(event, product)}
+                          >
+                            Add to cart
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </a>
+                  </div>
                 ))}
             </div>
           </div>
