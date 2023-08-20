@@ -52,7 +52,7 @@ const App = () => {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div style={{ fontFamily: "Montserrat" }} className="overflow-hidden">
       {/* Your app content */}
       {storedId ? (
         <HomePage RecommendedItems={jsonData} />

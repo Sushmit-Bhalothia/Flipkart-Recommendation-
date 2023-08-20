@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/walmart-logo-transparent-free-png.webp";
+import Logo from "../assets/flipkart_logo.png";
 import CartModal from "./CartModal";
 
 const Navbar = () => {
@@ -19,9 +19,10 @@ const Navbar = () => {
             alt="Logo"
             width={30}
             height={24}
+            style={{ marginTop: "-4px", marginRight: "5px" }}
             className="d-inline-block align-text-top"
           />
-          Walmart
+          Flipkart
         </a>
         <form className="d-flex" role="search">
           <input
