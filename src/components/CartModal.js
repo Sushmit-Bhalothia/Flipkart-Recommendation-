@@ -45,7 +45,7 @@ const CartModal = () => {
           alt="noimg"
           style={{ width: "30px", height: "30px" }}
         /> */}
-        <FontAwesomeIcon fontSize="30px" icon={faShoppingCart} />
+        <FontAwesomeIcon fontSize="30px" className="text-blue-500" icon={faShoppingCart} />
         {/* <FontAwesome /> */}
       </div>
 

@@ -57,9 +57,9 @@ export default function Products(props) {
     // localStorage.setItem("CartItems", JSON.stringify(updatedCartItems));
   };
 
-  if (props.Title === "Items Related to your Search")
+  if (props.Title === "Search Results")
     products = props.SearchedItems;
-  else if (props.Title === "You May Also Like")
+  else if (props.Title === "Your Recommendations")
     products = props.RecommendedItems;
   else {
     const storedCartItems = localStorage.getItem("CartItems");
@@ -131,7 +131,7 @@ export default function Products(props) {
                           </svg>
                         ))}
                         <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                          {`${(Math.random() * 1 + 4).toFixed(1)}`}
+                          {`?`}
                         </span>
                       </div>
 

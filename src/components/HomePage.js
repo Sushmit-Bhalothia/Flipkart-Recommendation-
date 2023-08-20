@@ -160,7 +160,7 @@ const HomePage = (props) => {
                     type="search"
                     id="default-search"
                     class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 "
-                    placeholder="Search Your Favs..."
+                    placeholder="What are you looking for?"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     required
@@ -205,14 +205,14 @@ const HomePage = (props) => {
         SearchedItems={searchResult}
         Btitle="Add to Cart"
         Bcolor="blue"
-        Title="Items Related to your Search"
+        Title="Search Results"
       />
       {props.RecommendedItems && (
         <Products
           RecommendedItems={props.RecommendedItems}
           Btitle="Add to Cart"
           Bcolor="blue"
-          Title="You May Also Like"
+          Title="Your Recommendations"
         />
       )}
 
