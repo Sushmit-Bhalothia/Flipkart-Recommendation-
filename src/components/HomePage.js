@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import backgroundImage from "../assets/TopImg.png";
+import backgroundImage from "../assets/Background.png";
 import Navbar from "./Navbar";
-import MainImg from "../assets/Walmart_logo.svg.png";
+import MainImg from "../assets/download.png";
 import Products from "./Products";
 import CartModal from "./CartModal";
 
@@ -69,7 +69,7 @@ const HomePage = (props) => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundImage: `url(${backgroundImage})`,
+            backgroundImage: "linear-gradient(90deg, #036bfc, #d5d9de)", // Blue gradient
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -91,7 +91,7 @@ const HomePage = (props) => {
           <img
             src={MainImg}
             alt="noimg"
-            style={{ opacity: 1, maxWidth: "100%" }}
+            style={{ opacity: 1, maxWidth: "100%", objectFit: "fill" }}
           />
         </div>
         <div
