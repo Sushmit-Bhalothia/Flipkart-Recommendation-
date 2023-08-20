@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Products from "./Products";
 import smallImage from "../assets/shopping-cart.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBagShopping,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
 
 const CartModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,20 +31,23 @@ const CartModal = () => {
 
   return (
     <>
-      <button
+      <div
         onClick={handleOpenModal}
         style={{
           backgroundColor: "transparent",
           border: "none",
           cursor: "pointer",
+          // width: "400px",
         }}
       >
-        <img
+        {/* <img
           src={smallImage}
           alt="noimg"
           style={{ width: "30px", height: "30px" }}
-        />
-      </button>
+        /> */}
+        <FontAwesomeIcon fontSize="30px" icon={faShoppingCart} />
+        {/* <FontAwesome /> */}
+      </div>
 
       {isModalOpen && (
         <div

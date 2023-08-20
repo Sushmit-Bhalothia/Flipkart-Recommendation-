@@ -105,7 +105,7 @@ const HomePage = (props) => {
         >
           {!isSticky && (
             <>
-              <input
+              {/* <input
                 type="text"
                 className="search-bar bg-white border border-gray-300 rounded p-2 w-full"
                 placeholder="Search Items..."
@@ -128,7 +128,58 @@ const HomePage = (props) => {
                 onClick={handleSearchClick}
               >
                 Search
-              </button>
+              </button> */}
+
+              <form style={{ width: "60vw", marginBottom: "-20px" }}>
+                <label
+                  for="default-search"
+                  className="mb-2 text-sm font-medium text-gray-900 sr-only"
+                >
+                  Search
+                </label>
+                <div className="relative">
+                  <div>
+                    {/* <svg
+                      class="w-4 h-4 text-gray-500 "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                      />
+                    </svg> */}
+                  </div>
+                  <input
+                    style={{ height: "10px" }}
+                    type="search"
+                    id="default-search"
+                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 "
+                    placeholder="Search Your Favs..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    required
+                  />
+                  <button
+                    style={{
+                      height: "47px",
+
+                      marginBottom: "-8.5px",
+                      marginRight: "-1vw",
+                    }}
+                    type="submit"
+                    class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleSearchClick}
+                  >
+                    Search
+                  </button>
+                </div>
+              </form>
             </>
           )}
         </div>
@@ -138,12 +189,12 @@ const HomePage = (props) => {
               position: "fixed",
               top: "10px", // Adjust top position as needed
               right: "10px", // Adjust right position as needed
-              backgroundColor: "white",
-              borderRadius: "50px",
+              // backgroundColor: "white",
+              // borderRadius: "50px",
               padding: "10px",
               paddingRight: "15px",
               borderColor: "black",
-              borderWidth: "1px",
+              // borderWidth: "1px",
             }}
           >
             <CartModal />

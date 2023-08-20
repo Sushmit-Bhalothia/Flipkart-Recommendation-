@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import defaultImage from "../assets/flipkart_logo.png";
 let products = [];
 
 export default function Products(props) {
@@ -100,6 +101,9 @@ export default function Products(props) {
                         className="p-8 rounded-t-lg"
                         src={product.product_img_url}
                         alt="product image"
+                        onError={(e) => {
+                          e.target.src = defaultImage; // Replace with default image on error
+                        }}
                       />
                     </a>
                     <div className="px-5 pb-5">
